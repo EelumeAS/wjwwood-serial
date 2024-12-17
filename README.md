@@ -1,6 +1,13 @@
-# Serial Communication Library
+**CUSTOM FORK NOTE**
+This fork does not change any functionality of the original code. Changes applied are:
+- Replaced usage of catkin build system in favor of cmake
+- Cleaned build warnings for linux and windows builds
 
-[![Build Status](https://travis-ci.org/wjwwood/serial.svg?branch=master)](https://travis-ci.org/wjwwood/serial)*(Linux and OS X)* [![Build Status](https://ci.appveyor.com/api/projects/status/github/wjwwood/serial)](https://ci.appveyor.com/project/wjwwood/serial)*(Windows)*
+The rationale for making this port is to create a custom vcpkg port that can be included
+in the different Eelume code projects the same way as other third party packages used.
+
+
+# Serial Communication Library
 
 This is a cross-platform library for interfacing with rs-232 serial like ports written in C++. It provides a modern C++ interface with a workflow designed to look and feel like PySerial, but with the speed and control provided by C++. 
 

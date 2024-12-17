@@ -1,6 +1,10 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package serial
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1.2.2 (2024-12-17)
+------------------
+* Replaced catkin build system with cmake
+* Fixed minor warnings related to unused variables and comparing unsigned and signed integers
 
 1.2.1 (2015-04-21)
 ------------------

@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include "serial/impl/win.h"
+#include <codecvt>
 
 using std::string;
 using std::wstring;
@@ -366,7 +367,8 @@ Serial::SerialImpl::setPort (const string &port)
 string
 Serial::SerialImpl::getPort () const
 {
-  return string(port_.begin(), port_.end());
+  std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+  return converter.to_bytes(port_);
 }
 
 void
