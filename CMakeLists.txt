@@ -7,6 +7,7 @@ project(wjwwood-serial
     LANGUAGES CXX
 )
 
+# Set up the build type (Release by default)
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(default_build_type "Release")
     if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -19,13 +20,17 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         )
     endif()
 
-    # Specify the C++ standard
     set(CMAKE_CXX_STANDARD 17)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
 endif()
 
-include(GNUInstallDirs)
+# SetupAPI is required on Windows, or else the linker will fail when using the library. 
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE setupapi)
+endif()
 
+# Define output locations for the library
+include(GNUInstallDirs)
 if(UNIX)
     option(BUILD_SHARED_LIBS "Build shared libraries(.so)." ON)
     set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
@@ -39,13 +44,13 @@ if(UNIX)
         set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${OUTPUTCONFIG}/lib)
         set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${OUTPUTCONFIG}/${CMAKE_INSTALL_BINDIR})
     endforeach()
-elseif(MSVC)
-    # Currently Only support static build for windows
+
+    elseif(MSVC)
+    # Build static library for Windows
     set(BUILD_SHARED_LIBS OFF)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
-    # for multi-config builds (e.g. msvc)
     foreach(OUTPUTCONFIG IN LISTS CMAKE_CONFIGURATION_TYPES)
         string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
         set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${OUTPUTCONFIG}/${CMAKE_INSTALL_BINDIR})
@@ -54,11 +59,10 @@ elseif(MSVC)
     endforeach()
 endif()
 
+# Add the library
 file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/*.cc)
 file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_LIST_DIR}/include/*.h)
 
-# Add the library
-set(TARGET_LIB wjwwood-serial)
 add_library(${PROJECT_NAME}
     ${SOURCES}
     ${HEADERS}
