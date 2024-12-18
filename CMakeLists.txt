@@ -24,11 +24,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
 endif()
 
-# SetupAPI is required on Windows, or else the linker will fail when using the library. 
-if(WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE setupapi)
-endif()
-
 # Define output locations for the library
 include(GNUInstallDirs)
 if(UNIX)
@@ -68,6 +63,11 @@ add_library(${PROJECT_NAME}
     ${HEADERS}
 )
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
+# SetupAPI is required on Windows, or else the linker will fail when using the library. 
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE setupapi)
+endif()
 
 # Include directories
 target_include_directories(${PROJECT_NAME} PRIVATE
