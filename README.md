@@ -1,4 +1,9 @@
 **CUSTOM FORK NOTE**
+
+_2025-02-25 Update_
+Functionality to list ports are upgraded to gather more ports than initially possible.
+
+_Initial release_
 This fork does not change any functionality of the original code. Changes applied are:
 - Replaced usage of catkin build system in favor of cmake
 - Cleaned build warnings for linux and windows builds
@@ -24,11 +29,7 @@ API Documentation: http://wjwwood.github.io/serial/doc/1.1.0/index.html
 ### Dependencies
 
 Required:
-* [catkin](http://www.ros.org/wiki/catkin) - cmake and Python based buildsystem
 * [cmake](http://www.cmake.org) - buildsystem
-* [Python](http://www.python.org) - scripting language
-  * [empy](http://www.alcyone.com/pyos/empy/) - Python templating library
-  * [catkin_pkg](http://pypi.python.org/pypi/catkin_pkg/) - Runtime Python library for catkin
 
 Optional (for documentation):
 * [Doxygen](http://www.doxygen.org/) - Documentation generation tool
@@ -38,23 +39,25 @@ Optional (for documentation):
 
 Get the code:
 
-    git clone https://github.com/wjwwood/serial.git
+    git clone https://github.com/EelumeAS/wjwwood-serial.git
+
+Configure:
+
+    With example application:
+    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLE=ON
+
+    Without example application:
+    cmake -DCMAKE_BUILD_TYPE=Release
 
 Build:
 
-    make
-
-Build and run the tests:
-
-    make test
-
-Build the documentation:
-
-    make doc
+    Windows: cmake --build . --config Release
+    Linux: make -j16
 
 Install:
 
-    make install
+    Windows cmake --install .
+    Linux: make install
 
 ### License
 

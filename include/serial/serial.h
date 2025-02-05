@@ -706,15 +706,13 @@ public:
 #else
       char * error_str = strerror(errnum);
 #endif
-      ss << "IO Exception (" << errno_ << "): " << error_str;
-      ss << ", file " << file_ << ", line " << line_ << ".";
+      ss << "IO Exception (" << errno_ << "): " << error_str << ".";
       e_what_ = ss.str();
   }
   explicit IOException (std::string file, int line, const char * description)
     : file_(file), line_(line), errno_(0) {
       std::stringstream ss;
-      ss << "IO Exception: " << description;
-      ss << ", file " << file_ << ", line " << line_ << ".";
+      ss << "IO Exception: " << description << ".";
       e_what_ = ss.str();
   }
   virtual ~IOException() throw() {}

@@ -1,10 +1,20 @@
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Changelog for package serial
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for forked serial
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1.2.3 (2025-01-02)
+------------------
+* (8017) Changed the linux serial port listing to include more device names
+* (8015) Removed the __file__ and __line__ macros from exception messages
+
 1.2.2 (2024-12-17)
 ------------------
 * Replaced catkin build system with cmake
 * Fixed minor warnings related to unused variables and comparing unsigned and signed integers
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Changelog for package serial (original)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1.2.1 (2015-04-21)
 ------------------
