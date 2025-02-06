@@ -285,9 +285,11 @@ serial::list_ports()
     vector<string> search_globs;
     
     // This broad pattern yields most devices, such as
-    // /dev/ttyUSB0, /dev/ttyS1, /dev/ttyACM2, /dev/ttyTHS3, /dev/ttyMXUSB4 etc.
+    // /dev/ttyUSB0, /dev/ttyACM2, /dev/ttyTHS3, /dev/ttyMXUSB4, /dev/ttyS10 etc.
     search_globs.push_back("/dev/tty[A-Za-z][A-Za-z0-9]*[0-9]");
-    //Then there are the serial devices with a more unusual naming pattern
+    // but it fails for the simplest /dev/ttyS<ONE digit> devices, so we add them explicitly
+    search_globs.push_back("/dev/ttyS[0-9]");
+    // Then there are the serial devices with more unusual naming pattern:
     // /dev/tty.usbmodem1234, /dev/cu.usb etc.
     search_globs.push_back("/dev/tty.*");
     search_globs.push_back("/dev/cu.*");
