@@ -2,8 +2,10 @@
 
 cmake_minimum_required(VERSION 3.27)
 
+option(BUILD_EXAMPLE "Build example executable" OFF)
+
 project(wjwwood-serial
-    VERSION 1.2.2
+    VERSION 1.2.3
     LANGUAGES CXX
 )
 
@@ -80,6 +82,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 set_target_properties(${PROJECT_NAME} PROPERTIES INSTALL_RPATH "$ORIGIN")
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+
+if (BUILD_EXAMPLE)
+    add_subdirectory(examples)
+endif()
 
 # Install the library
 install(TARGETS ${PROJECT_NAME}
